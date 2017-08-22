@@ -1,0 +1,29 @@
+start: 
+    c.li r4, 12                     # Set the number we want the factorial of
+    c.li r2, %exit                  # Set the link register to exit
+    c.addi r0, $factorial           # Call factorial function
+
+exit:
+    c.break                         # Breakpoint so we can see factorial number in r3
+    c.li r4, 0                      # Set status to 0
+    c.call 0                        # Call sys_exit(status)
+
+factorial:
+    mv r3, r4                       # Move r4 to r3 (return register)
+    c.addi r4, -1                   # Sub 1 from r4
+    c.li r5, 1
+
+factorial_loop:
+    beq r4, r5, $factorial_exit     # If r5 == r4 jump to exit
+    addi r6, r4, -1                 # Set r6 to r4 - 1
+    mv r7, r3                       # Move r3 to r7
+
+factorial_mult_loop:
+    c.add r3, r7                    # Add r7 to r3
+    c.addi r6, -1                   # Sub 1 from r6
+    c.bnz r6, $factorial_mult_loop  # If r6 != 0 jump to mult_loop
+    c.addi r4, -1                   # Sub 1 from r4
+    c.addi r0, $factorial_loop      # Jump to loop
+
+factorial_exit:
+    mv r0, r2                       # Move link register to program counter

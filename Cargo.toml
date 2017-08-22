@@ -1,0 +1,26 @@
+[package]
+name = "simple-virtual-machine"
+version = "0.1.0"
+authors = ["James Chapman <jchapman3000@gmail.com>"]
+
+[dependencies]
+byteorder = "1.0.0"
+clap = "2.23.0"
+enum_traits = { version = "1.0.0", features = ["stable"], git = "https://github.com/Lolirofle/enum_traits" }
+enum_traits_macros = { version = "3.0.0", features = ["stable"], git = "https://github.com/Lolirofle/enum_traits" }
+nom = { version = "2.2.0", features = ["verbose-errors"] }
+vec_map = "0.7.0"
+
+[lib]
+name = "svm"
+path = "src/lib.rs"
+
+[[bin]]
+name = "svm"
+path = "src/bin/main.rs"
+doc = false
+
+[[bin]]
+name = "sasm"
+path = "src/bin/assembler/main.rs"
+doc = false

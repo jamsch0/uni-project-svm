@@ -1,0 +1,34 @@
+start:
+    c.li r4, 1
+    c.li r5, %str_name
+    c.li r6, 16
+    c.call 2
+
+    c.li r4, 0
+    c.li r5, %buffer
+    c.li r6, 64
+    c.call 1
+
+    c.li r4, 1
+    c.li r5, %str_hello
+    addi r6, r3, 6
+    c.call 2
+
+    c.li r5, %str_bang
+    c.li r6, 2
+    c.call 2
+
+exit:
+    c.li r4, 0
+    c.call 0
+
+str_name:
+    bytes "Type your name: "
+
+str_bang:
+    bytes "!\n"
+
+str_hello:
+    bytes "Hello "
+
+buffer:
